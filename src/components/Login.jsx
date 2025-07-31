@@ -16,9 +16,9 @@ const Login = () => {
 
   const handleButtonClick = () => {
     const message = checkValidData(email.current.value , password.current.value);
-
     setErrorMessage(message);
   };
+  
   return (
     <div>
       <Header />
@@ -39,9 +39,13 @@ const Login = () => {
           onSubmit={(e) => e.preventDefault()}
           className="absolute right-0 left-0 p-12 w-[400px]  my-36 mx-auto z-20 bg-black bg-opacity-80 rounded text-white"
         >
+
+          {/* Heading */}
           <h1 className="text-3xl font-bold mb-6">
             {isSignIn ? "Sign In" : "Sign Up"}
           </h1>
+
+          {/* Name  */}
           {!isSignIn && (
             <input
               placeholder="Full Name"
@@ -50,25 +54,30 @@ const Login = () => {
             />
           )}
 
+
           <input
             ref={email}
             placeholder="Email Address"
             type="text"
             className=" text-white bg-gray-700  p-4 w-full mb-6 rounded "
           />
+
           <input
             ref={password}
             placeholder="Password"
             type="password"
             className=" text-white bg-gray-700 p-4 w-full mb-6 rounded"
           />
+
           <p className="text-red-600 p-2 my-2">{errorMessage}</p>
+
           <button
             onClick={handleButtonClick}
             className="bg-red-500 font-bold text-white w-full p-2 cursor-pointer hover:bg-red-700 rounded"
           >
             {isSignIn ? "Sign In" : "Sign Up"}
           </button>
+
           <p className="text-gray-500 my-2 py-3">
             {isSignIn ? "New to Neflix?" : "Already registered?"}
 
@@ -76,6 +85,7 @@ const Login = () => {
               {isSignIn ? "Sign Up Now." : "Sign In."}
             </Link>
           </p>
+
         </form>
       </div>
     </div>

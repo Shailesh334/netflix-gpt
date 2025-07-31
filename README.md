@@ -10,6 +10,9 @@
 - build login form
 - toggle between sign in/Sign up 
 - Form validation && useRef hooks
+- Firebase setup
+- Deploy on firebase
+- 
 
 
 
