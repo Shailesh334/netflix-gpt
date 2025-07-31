@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { Link } from "react-router-dom";
+import { checkValidData } from "../utils/validate";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const email = useRef(null);
+  const password = useRef(null);
+
   const toggleSignUp = () => {
     setIsSignIn(!isSignIn);
+  };
+
+  const handleButtonClick = () => {
+    const message = checkValidData(email.current.value , password.current.value);
+
+    setErrorMessage(message);
   };
   return (
     <div>
@@ -23,29 +35,38 @@ const Login = () => {
         <div className="absolute inset-0 bg-black opacity-60"></div>
 
         {/* Login Form */}
-        <form className="absolute right-0 left-0 p-12 w-[400px]  my-36 mx-auto z-20 bg-black bg-opacity-80 rounded text-white">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="absolute right-0 left-0 p-12 w-[400px]  my-36 mx-auto z-20 bg-black bg-opacity-80 rounded text-white"
+        >
           <h1 className="text-3xl font-bold mb-6">
             {isSignIn ? "Sign In" : "Sign Up"}
           </h1>
-          {
-            !isSignIn && <input
-            placeholder="Full Name"
-            type="text"
-            className=" text-white bg-gray-700 p-4 w-full mb-6 rounded"
-          />
-          }
-          
+          {!isSignIn && (
+            <input
+              placeholder="Full Name"
+              type="text"
+              className=" text-white bg-gray-700 p-4 w-full mb-6 rounded"
+            />
+          )}
+
           <input
-            placeholder="Email or mobile number"
+            ref={email}
+            placeholder="Email Address"
             type="text"
             className=" text-white bg-gray-700  p-4 w-full mb-6 rounded "
           />
           <input
+            ref={password}
             placeholder="Password"
             type="password"
             className=" text-white bg-gray-700 p-4 w-full mb-6 rounded"
           />
-          <button className="bg-red-500 font-bold text-white w-full p-2 ">
+          <p className="text-red-600 p-2 my-2">{errorMessage}</p>
+          <button
+            onClick={handleButtonClick}
+            className="bg-red-500 font-bold text-white w-full p-2 cursor-pointer hover:bg-red-700 rounded"
+          >
             {isSignIn ? "Sign In" : "Sign Up"}
           </button>
           <p className="text-gray-500 my-2 py-3">
