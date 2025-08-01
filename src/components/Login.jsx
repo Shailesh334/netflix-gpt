@@ -1,24 +1,97 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { checkValidData } from "../utils/validate";
 
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+
 const Login = () => {
+
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
   const email = useRef(null);
   const password = useRef(null);
+  const name = useRef(null);
 
   const toggleSignUp = () => {
     setIsSignIn(!isSignIn);
   };
 
-  const handleButtonClick = () => {
-    const message = checkValidData(email.current.value , password.current.value);
+  const handleSignInAndSignUp = () => {
+    const message = checkValidData(email.current.value, password.current.value);
+
     setErrorMessage(message);
+    if (name === null) {
+      setErrorMessage("Enter a valid full name");
+      return;
+    }
+
+    if (message) return;
+
+    if (!isSignIn) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+          updateProfile(auth.currentUser, {
+            displayName: name.current.value,
+            photoURL:
+              "https://upload.wikimedia.org/wikipedia/en/3/3d/Po_from_DreamWorks_Animation%27s_Kung_Fu_Panda.png",
+          })
+            .then(() => {
+              const { email, displayName, photoURL, uid } = auth.currentUser;
+              dispatch(
+                addUser({
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                  uid: uid,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              console.log(error);
+              navigate("/error");
+            });
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage);
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage);
+        });
+    }
   };
-  
+
   return (
     <div>
       <Header />
@@ -39,7 +112,6 @@ const Login = () => {
           onSubmit={(e) => e.preventDefault()}
           className="absolute right-0 left-0 p-12 w-[400px]  my-36 mx-auto z-20 bg-black bg-opacity-80 rounded text-white"
         >
-
           {/* Heading */}
           <h1 className="text-3xl font-bold mb-6">
             {isSignIn ? "Sign In" : "Sign Up"}
@@ -48,12 +120,12 @@ const Login = () => {
           {/* Name  */}
           {!isSignIn && (
             <input
+              ref={name}
               placeholder="Full Name"
               type="text"
               className=" text-white bg-gray-700 p-4 w-full mb-6 rounded"
             />
           )}
-
 
           <input
             ref={email}
@@ -72,7 +144,7 @@ const Login = () => {
           <p className="text-red-600 p-2 my-2">{errorMessage}</p>
 
           <button
-            onClick={handleButtonClick}
+            onClick={handleSignInAndSignUp}
             className="bg-red-500 font-bold text-white w-full p-2 cursor-pointer hover:bg-red-700 rounded"
           >
             {isSignIn ? "Sign In" : "Sign Up"}
@@ -85,7 +157,6 @@ const Login = () => {
               {isSignIn ? "Sign Up Now." : "Sign In."}
             </Link>
           </p>
-
         </form>
       </div>
     </div>
