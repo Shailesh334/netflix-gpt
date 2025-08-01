@@ -3,13 +3,17 @@ import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
 import { checkValidData } from "../utils/validate";
 
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
-
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -48,8 +52,7 @@ const Login = () => {
           console.log(user);
           updateProfile(auth.currentUser, {
             displayName: name.current.value,
-            photoURL:
-              "https://upload.wikimedia.org/wikipedia/en/3/3d/Po_from_DreamWorks_Animation%27s_Kung_Fu_Panda.png",
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               const { email, displayName, photoURL, uid } = auth.currentUser;
@@ -61,7 +64,6 @@ const Login = () => {
                   uid: uid,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               console.log(error);
