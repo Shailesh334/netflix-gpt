@@ -30,6 +30,8 @@
 - Update store with trailer video data
 - embed trailer in maincontainer along with trailertitle and overview
 - tailwind to make main container look awesome
+- secondary container with movieLists
+- different custom hooks for diff movie list
 
 
 

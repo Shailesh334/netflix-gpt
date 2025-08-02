@@ -44,7 +44,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute px-8 py-2 z-50 w-screen bg-gradient-to-b from-black via-black/90 flex justify-between items-center">
+    <div className="absolute px-8 py-2 z-50 inset-x-0 bg-gradient-to-b from-black via-black/90 flex justify-between items-center">
       <img
         className="w-44"
         src={LOGO_URL}

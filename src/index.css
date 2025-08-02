@@ -1,1 +1,21 @@
+
+@media (min-width: 640px) {
+    .bg_utube {
+        height: 100%;
+        transform: translateY(-40px);
+        -webkit-user-select: none;
+        user-select: none;
+        width: 100%;
+    }
+}
+.no-scrollbar-custom {
+    -ms-overflow-style: none;
+    scrollbar-width : none;
+}
+body::-webkit-scrollbar {
+  width: 0;
+  background: transparent; /* optional: no background */
+}
+
 @import "tailwindcss";
+
