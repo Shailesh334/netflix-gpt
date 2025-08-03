@@ -31,7 +31,15 @@
 - embed trailer in maincontainer along with trailertitle and overview
 - tailwind to make main container look awesome
 - secondary container with movieLists
+- TMDB image cdn url
 - different custom hooks for diff movie list
+- Created component for GptSerach
+- gptSlice to track the click on GptSearch button
+- Show gptserach and main component based on gptSearchView in store
+- Added language change <select> tag
+- created langSlice for selected language tracking
+- created constanst file to store languages and their respective trems
+- implemented langiage change for GPT Serach page
 
 
 
@@ -39,5 +47,5 @@
 # Features 
 
 - login / signUp ✅
-- Browse
-- 
+- Browse page ✅
+- GPT Search feature 

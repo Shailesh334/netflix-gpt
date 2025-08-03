@@ -7,7 +7,7 @@ const VideoBackground = ({ movieId }) => {
   // fetch trailer and add it to store
   useTrailer(movieId);
 
-  console.log("trailer", trailer);
+  
 
   return (
     <div className=" w-full h-full overflow-hidden">
