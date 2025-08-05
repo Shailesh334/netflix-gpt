@@ -44,9 +44,26 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Features 
 
 - login / signUp ✅
 - Browse page ✅
 - GPT Search feature ✅
+- deployment ✅
 - deployment ✅
