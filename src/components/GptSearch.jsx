@@ -1,13 +1,11 @@
-
 import GptMovieRecommendation from "./GptMovieRecommendation";
-import GptSearchBar from "./gptSearchBar";
+import GptSearchBar from "./GptSearchBar";
 
 const GptSearch = () => {
-  
   return (
     <>
-    <GptSearchBar />
-    <GptMovieRecommendation />
+      <GptSearchBar />
+      <GptMovieRecommendation />
     </>
   );
 };
