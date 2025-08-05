@@ -11,7 +11,6 @@ import GptSearch from "./GptSearch";
 const Browse = () => {
   const gptSearchView  = useSelector(store => store.gpt.gptSearchView);
 
-  console.log(gptSearchView)
 
   useNowPlayingMovie();
   usePopularMovies();

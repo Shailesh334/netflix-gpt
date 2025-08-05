@@ -10,7 +10,7 @@ import { addAiringToday } from "../utils/moviesSlice";
 const useAiringToday = () => {
 
     const dispatch = useDispatch();
-
+    
   const getAiringToday = async () => {
 
     const data = await fetch(

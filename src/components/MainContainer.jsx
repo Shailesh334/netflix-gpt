@@ -9,9 +9,11 @@ const MainContainer = () => {
     
     if(!movies)return;
 
-    const movie = movies[11];
+      
+    const movie = movies.filter(movie => movie.original_title === "Karate Kid: Legends");
+  console.log(movie);
     
-    const {original_title , overview , id} = movie;
+    const {original_title , overview , id} = movie[0];
    
   return (
     <div >

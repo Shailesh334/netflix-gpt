@@ -73,7 +73,7 @@ const Header = () => {
 
           <button
             onClick={handleGptSearchClick}
-            className="bg-gray-900 text-white font-bold rounded p-2 px-4 mx-6 text-center hover:bg-gray-800 cursor-pointer"
+            className="bg-purple-700 text-white font-bold rounded p-2 px-4 mx-6 text-center hover:bg-gray-900 cursor-pointer"
           >
             {gptSearchView ? "🏠 Home" : "💭Ask GPT"}
           </button>
