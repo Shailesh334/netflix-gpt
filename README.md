@@ -48,4 +48,5 @@
 
 - login / signUp ✅
 - Browse page ✅
-- GPT Search feature 
+- GPT Search feature ✅
+- deployment ✅
