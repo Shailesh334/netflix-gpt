@@ -2,17 +2,22 @@ import React, { useRef } from "react";
 import { lang } from "../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
 import useGptApi from "../hooks/useGptApi";
-import { addMovieNames } from "../utils/gptSlice";
+import {  toggleGptSearchView } from "../utils/gptSlice";
+
+import Browse from "./Browse";
 
 const GptSearchBar = () => {
   const selectedLang = useSelector((store) => store.config.langSelected);
+  
   const dispatch = useDispatch();
   const input = useRef();
-
+  
   const handleGptSearchBtn = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const movieNames = await useGptApi(input.current.value);
-    dispatch(addMovieNames(movieNames));
+    // const movieNames = await useGptApi(input.current.value);
+    // dispatch(addMovieNames(movieNames));
+    alert("Currently this feature is off due to api limits");
+   dispatch(toggleGptSearchView());
   };
 
   return (
